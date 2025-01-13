@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icase.mapper.FeeMapper">
+    <update id="updateFee">
+        UPDATE `his-d_his`.his_d_fee
+        <set>
+            <if test="fNumber != null">f_number=#{fNumber}, </if>
+            <if test="fDate != null">f_date=#{fDate}, </if>
+            <if test="dgNo != null">dg_no=#{dgNo}, </if>
+            <if test="rNo != null">r_no=#{rNo}, </if>
+            <if test="cNo != null">c_no=#{cNo}, </if>
+            <if test="pNo != null">p_no=#{pNo}, </if>
+            <if test="fRecipeFee != null">f_recipe_fee=#{fRecipeFee}, </if>
+            <if test="fDiscount != null">f_discount=#{fDiscount}, </if>
+            <if test="fSum != null">f_sum=#{fSum} </if>
+            <if test="payed != null">payed=#{payed} </if>
+        </set>
+        WHERE f_no=#{fNo};
+    </update>
+
+    <select id="getFee" resultType="com.icase.pojo.Fee">
+        SELECT f_no, f_number, f_date, dg_no, r_no, c_no, p_no, f_recipe_fee, f_discount, f_sum, payed
+        FROM `his-d_his`.his_d_fee
+        <where>
+            <if test="pNo!=null">p_no=#{pNo}</if>
+        </where>
+    </select>
+</mapper>

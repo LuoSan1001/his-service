@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icase.mapper.RegisterMapper">
+
+    <insert id="insertRegister">
+        INSERT INTO `his-d_his`.`his-d_register_form`
+        (rf_dept, rf_doctor, rf_patient, rf_cashier, rf_time, rf_visit_time, rf_fee, rf_notes)
+        VALUES(#{rfDept}, #{rfDoctor}, #{rfPatient}, #{rfCashier}, #{rfTime}, #{rfVisitTime}, #{rfFee}, #{rfNotes});
+    </insert>
+    <select id="selectRegister" resultType="com.icase.pojo.Register">
+        SELECT rf_no, rf_dept, rf_doctor, rf_patient, rf_cashier, rf_time, rf_visit_time, rf_fee, rf_notes
+        FROM `his-d_his`.`his-d_register_form`
+        <where>
+            <if test="dNo != null">rf_doctor=#{dNo} </if>
+            <if test="rfVisitTime != null">and rf_visit_time=#{rfVisitTime} </if>
+            <if test="pNo != null">and rf_patient=#{pNo} </if>
+        </where>
+    </select>
+</mapper>

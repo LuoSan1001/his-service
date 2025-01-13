@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icase.mapper.UserMapper">
+    <insert id="register">
+        INSERT INTO `his-d_his`.his_d_user
+            (username, account, password, `type`, type_id)
+        VALUES(#{userName}, #{account}, #{password}, #{type}, #{typeId});
+    </insert>
+    <update id="update">
+        UPDATE `his-d_his`.his_d_user
+        <set>
+            <if test="userName != null">username=#{userName}</if>
+            <if test="account != null">account=#{account}</if>
+            <if test="password != null">password=#{password}</if>
+            <if test="type != null">type=#{type}</if>
+            <if test="type_id != null">type_id=#{typeId}</if>
+        </set>
+        WHERE id=#{id};
+    </update>
+    <select id="getAllUser" resultType="com.icase.pojo.User">
+        SELECT id, username, account, password, `type`, type_id
+        FROM `his-d_his`.his_d_user;
+    </select>
+    <select id="login" resultType="com.icase.pojo.User">
+        SELECT id, username, account, password, `type`, type_id
+        FROM `his-d_his`.his_d_user
+        WHERE username=#{userName}
+        AND password=#{password};
+    </select>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icase.mapper.DoctorMapper">
+    <insert id="insertDoctor">
+        INSERT INTO `his-d_his`.his_d_doctor
+            (d_no, d_name, d_sex, d_age, dept_no, t_no, d_user_name)
+        VALUES(0, '', '', 0, 0, 0, '');
+    </insert>
+
+    <select id="getDoctor" resultType="com.icase.pojo.Doctor">
+        SELECT d_no, d_name, d_sex, d_age, dept_no, t_no, d_user_name
+        FROM `his-d_his`.his_d_doctor
+        <where>
+            <if test="dNo!=null">d_no=#{dNo}</if>
+        </where>
+    </select>
+</mapper>
