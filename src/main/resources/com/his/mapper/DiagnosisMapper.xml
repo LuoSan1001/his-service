@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.mapper.DiagnosisMapper">
+    <insert id="insertDiagnosis"></insert>
+    <update id="updateDiagnosis">
+        UPDATE `his-d_his`.his_d_diagnosis
+        <set>
+            <if test="pNo != null">p_no=#{pNo}, </if>
+            <if test="deptNo != null">dept_no=#{deptNo}, </if>
+            <if test="dNo != null">d_no=#{dNo}, </if>
+            <if test="symptom != null">symptom=#{symptom}, </if>
+            <if test="diagnosis != null">diagnosis=#{diagnosis}, </if>
+            <if test="dgTime != null">dg_time=#{dgTime}, </if>
+        </set>
+        WHERE dg_no=#{dgNo};
+    </update>
+    <delete id="deleteDiagnosis">
+        DELETE FROM `his-d_his`.his_d_diagnosis
+        WHERE dg_no in
+        <foreach collection="list" item="dgno" open="(" separator="," close=")">
+            #{dgno}
+        </foreach>;
+    </delete>
+
+    <select id="selectDiagnosis" resultType="com.his.pojo.Diagnosis">
+        SELECT dg_no, p_no, dept_no, d_no, symptom, diagnosis, dg_time
+        FROM `his-d_his`.his_d_diagnosis
+        <where>
+            <if test="pNo != null">p_no=#{pNo} </if>
+            <if test="dNo != null">AND d_no=#{dNo} </if>
+        </where>
+    </select>
+</mapper>

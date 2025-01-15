@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.icase</groupId>
-    <artifactId>icase-service</artifactId>
+    <artifactId>his-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>icase-service</name>
     <description>Demo project for Spring Boot</description>
@@ -83,7 +83,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.icase.IcaseServiceApplication</mainClass>
+                    <mainClass>com.his.HISServiceApplication</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>
