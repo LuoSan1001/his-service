@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.mapper.DoctorMapper">
+    <insert id="insertDoctor">
+        INSERT INTO `his-d_his`.his_d_doctor
+            (d_name, d_sex, d_age, dept_no, t_no, d_user_name)
+        VALUES(#{dName}, #{dSex}, #{dAge}, #{deptNo}, #{tNo}, #{dUserName});
+    </insert>
+    <update id="updateDoctor">
+        UPDATE `his-d_his`.his_d_doctor
+        <set>
+            <if test="dName != null">d_name=#{dName}, </if>
+            <if test="dSex != null">d_sex=#{dSex}, </if>
+            <if test="dAge != null">d_age=#{dAge}, </if>
+            <if test="deptNo != null">dept_no=#{deptNo}, </if>
+            <if test="tNo != null">t_no=#{tNo}, </if>
+            <if test="dUserName != null">d_user_name=#{dUserName}, </if>
+        </set>
+        WHERE d_no=#{dNo};
+    </update>
+    <delete id="deleteDoctor">
+        DELETE FROM `his-d_his`.his_d_doctor
+        WHERE d_no in
+        <foreach collection="list" item="dno" open="(" separator="," close=")">
+            #{dno}
+        </foreach>;
+    </delete>
+
+    <select id="getDoctor" resultType="com.his.pojo.Doctor">
+        SELECT d_no, d_name, d_sex, d_age, dept_no, t_no, d_user_name
+        FROM `his-d_his`.his_d_doctor
+        <where>
+            <if test="dNo!=null">d_no=#{dNo}</if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.his.mapper.PatientMapper">
+    <insert id="insertPatient">
+        INSERT INTO `his-d_his`.`his-d_patient`
+            (pno, pname, psex, pbd, pid, pino, pmno, padd, ptel, pusername)
+        VALUES(#{pno}, #{pname}, #{psex}, #{pbd}, #{pid}, #{pino}, #{pmno}, #{padd}, #{ptel}, #{pusername});
+    </insert>
+    <update id="updatePatient">
+        UPDATE `his-d_his`.`his-d_patient`
+        <set>
+            <if test="pname != null">pname=#{pname}, </if>
+            <if test="psex != null">psex=#{psex}, </if>
+            <if test="pbd != null">pbd=#{pbd}, </if>
+            <if test="pid != null">pid=#{pid}, </if>
+            <if test="pino != null">pino=#{pino}, </if>
+            <if test="pmno != null">pmno=#{pmno}, </if>
+            <if test="padd != null">padd=#{padd}, </if>
+            <if test="ptel != null">ptel=#{ptel}, </if>
+            <if test="pusername != null">Pusername=#{pusername} </if>
+        </set>
+        WHERE Pno=#{pno};
+    </update>
+    <delete id="deletePatient">
+        DELETE FROM `his-d_his`.`his-d_patient`
+        WHERE pno in
+        <foreach collection="list" item="pno" open="(" separator="," close=")">
+            #{pno}
+        </foreach>;
+    </delete>
+    <select id="getPatient" resultType="com.his.pojo.Patient">
+        SELECT *
+        FROM `his-d_his`.`his-d_patient`
+        <where>
+            <if test="pno != null">pno = #{pno}</if>
+        </where>
+    </select>
+</mapper>
